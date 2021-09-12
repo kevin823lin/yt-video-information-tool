@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "YouTube™ 留言工具",
+    "description": "Tool for YouTube™ Comment"
+  },
+    "appDesc": {
+    "message": "在 YouTube™ 中顯示留言所提及的影片資訊",
+    "description": "Show the video information which is mentioned in the comment on YouTube™"
+  }
+}

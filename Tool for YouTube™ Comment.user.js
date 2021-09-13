@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Tool for YouTube™ Comment
 // @namespace    https://github.com/kevin823lin
-// @version      0.1
+// @version      0.2
 // @description  Show the video information which is mentioned in the comment on YouTube™
 // @author       kevin823lin
 // @match        https://www.youtube.com/watch?*

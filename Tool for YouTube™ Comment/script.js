@@ -55,7 +55,7 @@ function allThing(a){
 	xhr.open("GET", videoURL, true);
 	xhr.onreadystatechange = function() { 
 	  if (xhr.readyState == 4) {
-		var data = JSON.parse((/var ytInitialData = (.*?);/m).exec(xhr.responseText)[1]);
+		var data = JSON.parse((/var ytInitialData = (.*?)};/m).exec(xhr.responseText)[1] + '}');
 		insertHTML(a, videoInfo(id, a.href, data));
 	  }
 	}

@@ -62,6 +62,9 @@ function allThing(a){
 	xhr.send();
 }
 
-document.addEventListener('DOMNodeInserted', function() {
-  [...document.querySelectorAll('#content-text > a[href^="/watch"]:not([hasInfo=true])')].filter(function(a){return a.text.indexOf('//') != -1}).forEach(a => allThing(a));
+document.addEventListener('DOMSubtreeModified', function() {
+	if (!document.querySelectorAll('a[hasInfo=true]').length) {
+		document.querySelectorAll('.yt-comment-video').forEach(ele => ele.remove());
+	}
+	[...document.querySelectorAll('#content-text > a[href^="/watch"]:not([hasInfo=true])')].filter(function(a){return a.text.indexOf('//') != -1}).forEach(a => allThing(a));
 }, false);

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Tool for YouTube™ Comment
 // @namespace    https://github.com/kevin823lin
-// @version      0.2
+// @version      0.3
 // @description  Show the video information which is mentioned in the comment on YouTube™
 // @author       kevin823lin
 // @match        https://www.youtube.com/watch?*
@@ -79,7 +79,10 @@ function allThing(a){
     'use strict';
 
     // Your code here...
-    document.addEventListener('DOMNodeInserted', function() {
+    document.addEventListener('DOMSubtreeModified', function() {
+        if (!document.querySelectorAll('a[hasInfo=true]').length) {
+            document.querySelectorAll('.yt-comment-video').forEach(ele => ele.remove());
+        }
         [...document.querySelectorAll('#content-text > a[href^="/watch"]:not([hasInfo=true])')].filter(function(a){return a.text.indexOf('//') != -1}).forEach(a => allThing(a));
     }, false);
 })();

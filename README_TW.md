@@ -18,7 +18,7 @@
 
 * 使用 Chrome Extension
 
-    1. 下載「Tool for YouTube™ Comment.zip」並解壓縮
+    1. 從 [releases](https://github.com/kevin823lin/Tool-for-YouTube-Comment/releases) 下載「Tool.for.YouTube.Comment.zip」並解壓縮
 
     1. 前往 [chrome://extensions/](chrome://extensions/)
 

@@ -18,7 +18,7 @@ Show the video information which is mentioned in the comment on YouTube™
 
 * Using Chrome Extension
 
-    1. Download "Tool for YouTube™ Comment.zip" and unzip it
+    1. Download "Tool.for.YouTube.Comment.zip" from [releases](https://github.com/kevin823lin/Tool-for-YouTube-Comment/releases) and unzip it
 
     1. Go to [chrome://extensions/](chrome://extensions/)
 

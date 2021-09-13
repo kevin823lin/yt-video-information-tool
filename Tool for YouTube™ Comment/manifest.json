@@ -2,7 +2,7 @@
   "name": "__MSG_appName__",
   "action": {},
   "manifest_version": 3,
-  "version": "0.1",
+  "version": "0.2",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
   "content_scripts": [

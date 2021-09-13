@@ -63,7 +63,5 @@ function allThing(a){
 }
 
 document.addEventListener('DOMNodeInserted', function() {
-  //console.log('The hash has changed!');
-	console.log('changed 2');
   [...document.querySelectorAll('#content-text > a[href^="/watch"]:not([hasInfo=true])')].filter(function(a){return a.text.indexOf('//') != -1}).forEach(a => allThing(a));
 }, false);

@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Tool for YouTube™ Comment
 // @namespace    https://github.com/kevin823lin
-// @version      0.3
+// @version      0.3.1
 // @description  Show the video information which is mentioned in the comment on YouTube™
 // @author       kevin823lin
-// @match        https://www.youtube.com/watch?*
+// @match        https://www.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
 // @grant        none
 // @date         2021-09-13

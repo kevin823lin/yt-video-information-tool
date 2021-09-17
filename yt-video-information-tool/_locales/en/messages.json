@@ -1,0 +1,8 @@
+{
+  "appName": {
+    "message": "YT Video Information Tool"
+  },
+    "appDesc": {
+    "message": "Show the video information which is mentioned in the description or the comments on YouTube™ videos."
+  }
+}

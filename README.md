@@ -1,8 +1,8 @@
 EN | [正體中文](./README_TW.md) | [简体中文](./README_CN.md)
 
-# Tool for YouTube™ Comment
+# YT Video Information Tool
 
-Show the video information which is mentioned in the comment on YouTube™
+Show the video information which is mentioned in the description or the comments on YouTube™ videos.
 
 ## Demo
 
@@ -18,7 +18,7 @@ Show the video information which is mentioned in the comment on YouTube™
 
 * Using Chrome Extension
 
-    1. Download "Tool.for.YouTube.Comment.zip" from [releases](https://github.com/kevin823lin/Tool-for-YouTube-Comment/releases) and unzip it
+    1. Download "[yt-video-information-tool.zip](./yt-video-information-tool.zip?raw=1)" and unzip it
 
     1. Go to [chrome://extensions/](chrome://extensions/)
 
@@ -42,8 +42,8 @@ Show the video information which is mentioned in the comment on YouTube™
 
     1. Install a user script manager
 
-    1. Download or open [Tool for YouTube™ Comment.user.js](https://github.com/kevin823lin/Tool-for-YouTube-Comment/raw/main/Tool%20for%20YouTube%E2%84%A2%20Comment.user.js)
+    1. Download or open "[yt-video-information-tool.user.js](./yt-video-information-tool.user.js?raw=1)"
 
 ---
 
-* Icon(svg) from [Material Design Icons](https://materialdesignicons.com/)
+* Icon(svg) from [YouTube™](https://youtube.com/)

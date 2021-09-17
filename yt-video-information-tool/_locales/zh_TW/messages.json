@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "YT 影片資訊工具",
+    "description": "YT Video Information Tool"
+  },
+    "appDesc": {
+    "message": "在 YouTube™ 中顯示資訊欄及留言所提及的影片資訊",
+    "description": "Show the video information which is mentioned in the description or the comments on YouTube™ videos."
+  }
+}

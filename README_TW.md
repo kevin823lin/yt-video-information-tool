@@ -1,8 +1,8 @@
 [EN](./README.md) | 正體中文 | [简体中文](./README_CN.md)
 
-# YouTube™ 留言工具
+# YT 影片資訊工具
 
-在 YouTube™ 中顯示留言所提及的影片資訊
+在 YouTube™ 中顯示資訊欄及留言所提及的影片資訊
 
 ## 演示
 
@@ -18,7 +18,7 @@
 
 * 使用 Chrome Extension
 
-    1. 從 [releases](https://github.com/kevin823lin/Tool-for-YouTube-Comment/releases) 下載「Tool.for.YouTube.Comment.zip」並解壓縮
+    1. 下載「[yt-video-information-tool.zip](./yt-video-information-tool.zip?raw=1)」並解壓縮
 
     1. 前往 [chrome://extensions/](chrome://extensions/)
 
@@ -42,8 +42,8 @@
 
     1. 安裝使用者腳本管理器
 
-    1. 下載或開啟 [Tool for YouTube™ Comment.user.js](https://github.com/kevin823lin/Tool-for-YouTube-Comment/raw/main/Tool%20for%20YouTube%E2%84%A2%20Comment.user.js)
+    1. 下載或開啟「[yt-video-information-tool.user.js](./yt-video-information-tool.user.js?raw=1)」
 
 ---
 
-* Icon(svg) from [Material Design Icons](https://materialdesignicons.com/)
+* Icon(svg) from [YouTube™](https://youtube.com/)

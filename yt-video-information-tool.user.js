@@ -237,7 +237,7 @@
                 id: id,
                 idFromRes: idFromRes,
                 href: a.getAttribute('href'),
-                imgURL: `https://img.youtube.com/vi/${id}/0.jpg`,
+                imgURL: `https://img.youtube.com/vi/${id}/mqdefault.jpg`,
                 title: videoPrimaryInfoRenderer.title.runs.map(ele => ele.text).join(''),
                 viewCount: videoPrimaryInfoRenderer.viewCount.videoViewCountRenderer.viewCount.simpleText,
                 date: videoPrimaryInfoRenderer.dateText.simpleText,

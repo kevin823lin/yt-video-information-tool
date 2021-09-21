@@ -210,7 +210,7 @@
                             <span>${videoInfo.date}</span>
                             <br/>
                         </div>
-                        <img src="${videoInfo.imgURL}" style="max-width: 150px;flex: 1;height: fit-content;border-radius: 10px;margin-left: 5px;">
+                        <img src="${videoInfo.imgURL}" style="max-width: 170px;flex: 1;height: fit-content;border-radius: 10px;margin-left: 5px;">
                     </div>
                     <div class="yt-simple-endpoint" style="display: flex;align-items: center;">
                         <div style="flex: 1;display: flex;align-items: center">

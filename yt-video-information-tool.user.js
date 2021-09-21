@@ -16,6 +16,7 @@
     'use strict';
 
     // Your code here...
+
     /*-----------------------define-----------------------*/
     const meta = 0;
     const comments = 1;
@@ -46,6 +47,7 @@
         </div>
     `;
     /*-----------------------enddefine-----------------------*/
+
     window.addEventListener('load', function () {
         let style = `
 			.yt-video-info{
@@ -102,130 +104,149 @@
     });
 
     function addEventListenerToPrimaryInner() {
-        document.querySelector('#primary-inner').addEventListener('DOMSubtreeModified', function () {
-            removeElement();
-            addElement();
-        }, false);
+        try {
+            document.querySelector('#primary-inner').addEventListener('DOMSubtreeModified', function () {
+                removeElement();
+                addElement();
+            }, false);
+        } catch (e) {
+            console.error(`addEventListenerToPrimaryInner: ${e}`);
+        }
     }
-    
+
     async function removeElement() {
-        if (!removeLock) {
-            removeLock = true;
-            for (let i = 0; i < 2; i++) {
-                const temp = oldInfoIndex;
-                document.querySelectorAll('a.yt-video-url').forEach(function (ele) {
-                    if (ele.getAttribute('infoIndex') < temp || !ele.getAttribute('href').match('^/watch')) {
-                        ele.classList.remove('yt-video-url');
-                    }
-                });
-                document.querySelectorAll('a.yt-video-info').forEach(function (ele) {
-                    if (![...document.querySelectorAll(`a.yt-video-url[href^="/watch"][infoIndex="${ele.getAttribute('infoIndex')}"]`)].filter(function (a) {
+        try {
+            if (!removeLock) {
+                removeLock = true;
+                for (let i = 0; i < 2; i++) {
+                    const temp = oldInfoIndex;
+                    document.querySelectorAll('a.yt-video-url').forEach(function (ele) {
+                        if (ele.getAttribute('infoIndex') < temp || !ele.getAttribute('href').match('^/watch')) {
+                            ele.classList.remove('yt-video-url');
+                        }
+                    });
+                    document.querySelectorAll('a.yt-video-info').forEach(function (ele) {
+                        if (![...document.querySelectorAll(`a.yt-video-url[href^="/watch"][infoIndex="${ele.getAttribute('infoIndex')}"]`)].filter(function (a) {
                             return a.text.indexOf('/') != -1;
                         }).length) {
-                        ele.remove();
+                            ele.remove();
+                        }
+                    });
+                    if (i == 0) {
+                        await wait(1000);
                     }
-                });
-                if (i == 0) {
-                    await wait(1000);
                 }
+                removeLock = false;
             }
-            removeLock = false;
+        } catch (e) {
+            console.error(`removeElement: ${e}`);
         }
     }
-    
+
     async function addElement() {
-        if (!addLock && !ytNavigate && location.href.match('^https://www.youtube.com/watch')) {
-            addLock = true;
-            // description
-            let metaList = [...document.querySelectorAll(`#primary-inner #meta a[href^="/watch"]:not(.yt-video-info):not([yt-video-info-error=true])`)].filter(function (a) {
-                return (a.text.indexOf('/') != -1) && (a.getAttribute('infoIndex') ? a.getAttribute('infoIndex') < oldInfoIndex : true);
-            });
-            metaList.forEach(ele => {
-                ele.area = meta;
-            });
-            // comments
-            let commentsList = [...document.querySelectorAll(`#primary-inner #comments a[href^="/watch"]:not(.yt-video-info):not([yt-video-info-error=true])`)].filter(function (a) {
-                return (a.text.indexOf('/') != -1) && (a.getAttribute('infoIndex') ? a.getAttribute('infoIndex') < oldInfoIndex : true);
-            });
-            commentsList.forEach(ele => {
-                ele.area = comments;
-            });
-            let aList = metaList.concat(commentsList);
-            await insertHTML(aList);
-            addLock = false;
+        try {
+            if (!addLock && !ytNavigate && location.href.match('^https://www.youtube.com/watch')) {
+                addLock = true;
+                // description
+                let metaList = [...document.querySelectorAll(`#primary-inner #meta a[href^="/watch"]:not(.yt-video-info):not([yt-video-info-error=true])`)].filter(function (a) {
+                    return (a.text.indexOf('/') != -1) && (a.getAttribute('infoIndex') ? a.getAttribute('infoIndex') < oldInfoIndex : true);
+                });
+                metaList.forEach(ele => {
+                    ele.area = meta;
+                });
+                // comments
+                let commentsList = [...document.querySelectorAll(`#primary-inner #comments a[href^="/watch"]:not(.yt-video-info):not([yt-video-info-error=true])`)].filter(function (a) {
+                    return (a.text.indexOf('/') != -1) && (a.getAttribute('infoIndex') ? a.getAttribute('infoIndex') < oldInfoIndex : true);
+                });
+                commentsList.forEach(ele => {
+                    ele.area = comments;
+                });
+                let aList = metaList.concat(commentsList);
+                await insertHTML(aList);
+                addLock = false;
+            }
+        } catch (e) {
+            console.error(`addElement: ${e}`);
         }
     }
-    
+
     async function insertHTML(aList) {
-        let responseList = getResponseList(aList);
-        for (let i = 0; i < responseList.length; i++) {
-            let a = aList[i];
-            if (!a.href.match('^https://www.youtube.com/watch')) {
-                continue;
-            };
-            let res = await responseList[i];
-            let videoInfo = getVideoInfo(a, res);
-            if (!videoInfo) {
-                a.setAttribute('yt-video-info-error', true);
-                continue;
-            }
-            if (videoInfo.id != videoInfo.idFromRes) {
-                let response = getResponseList([a]);
-                res = await response[0];
-                videoInfo = getVideoInfo(a, res);
+        try {
+            let responseList = getResponseList(aList);
+            for (let i = 0; i < responseList.length; i++) {
+                let a = aList[i];
+                if (!a.href.match('^https://www.youtube.com/watch')) {
+                    continue;
+                };
+                let res = await responseList[i];
+                let videoInfo = getVideoInfo(a, res);
                 if (!videoInfo) {
                     a.setAttribute('yt-video-info-error', true);
                     continue;
                 }
-            }
-            a.classList.add('yt-video-url');
-            a.setAttribute('infoIndex', infoIndex);
-    
-            let observer = new MutationObserver(function (mutations) {
-                let mutation = mutations[0];
-                mutation.target.removeAttribute('yt-video-info-error');
-                mutation.target.infoIndex = 0;
-                observer.disconnect();
-            });
-            observer.observe(a, {
-                attributes: true,
-                attributeFilter: ['href']
-            });
-    
-            let path = a.parentElement.parentElement.parentElement;
-            if (a.area == meta) {
-                path = path.parentElement;
-            }
-            await path.insertAdjacentHTML('beforeend', `
-                <a infoIndex=${infoIndex++} class="yt-video-info" href="${videoInfo.href}">
-                    <div style="display: flex;align-items: center;margin: 5px;">
-                        <div style="flex: 1;width: min-content;margin-right: 5px;">
-                            <span class="yt-simple-endpoint">${videoInfo.title}</span>
-                            <div style="display: flex;align-items: center;">
-                                <span>${videoInfo.author}</span>
-                                ${videoInfo.authorVerify ? verifyIcon : ''}
+                if (videoInfo.id != videoInfo.idFromRes) {
+                    let response = getResponseList([a]);
+                    res = await response[0];
+                    videoInfo = getVideoInfo(a, res);
+                    if (!videoInfo) {
+                        a.setAttribute('yt-video-info-error', true);
+                        continue;
+                    }
+                    if (videoInfo.id != videoInfo.idFromRes) {
+                        continue;
+                    }
+                }
+                a.classList.add('yt-video-url');
+                a.setAttribute('infoIndex', infoIndex);
+
+                let observer = new MutationObserver(function (mutations) {
+                    let mutation = mutations[0];
+                    mutation.target.removeAttribute('yt-video-info-error');
+                    mutation.target.infoIndex = 0;
+                    observer.disconnect();
+                });
+                observer.observe(a, {
+                    attributes: true,
+                    attributeFilter: ['href']
+                });
+
+                let path = a.parentElement.parentElement.parentElement;
+                if (a.area == meta) {
+                    path = path.parentElement;
+                }
+                await path.insertAdjacentHTML('beforeend', `
+                    <a infoIndex=${infoIndex++} class="yt-video-info" href="${videoInfo.href}">
+                        <div style="display: flex;align-items: center;margin: 5px;">
+                            <div style="flex: 1;width: min-content;margin-right: 5px;">
+                                <span class="yt-simple-endpoint">${videoInfo.title}</span>
+                                <div style="display: flex;align-items: center;">
+                                    <span>${videoInfo.author}</span>
+                                    ${videoInfo.authorVerify ? verifyIcon : ''}
+                                </div>
+                                <span>${videoInfo.viewCount}</span>
+                                <br/>
+                                <span>${videoInfo.date}</span>
+                                <br/>
                             </div>
-                            <span>${videoInfo.viewCount}</span>
-                            <br/>
-                            <span>${videoInfo.date}</span>
-                            <br/>
+                            <img src="${videoInfo.imgURL}" style="max-width: 170px;flex: 1;height: fit-content;border-radius: 10px;margin-left: 5px;">
                         </div>
-                        <img src="${videoInfo.imgURL}" style="max-width: 170px;flex: 1;height: fit-content;border-radius: 10px;margin-left: 5px;">
-                    </div>
-                    <div class="yt-simple-endpoint" style="display: flex;align-items: center;">
-                        <div style="flex: 1;display: flex;align-items: center">
-                            ${likeIcon}
-                            <span style="flex: 1;margin: 5px;">${videoInfo.like}</span>
+                        <div class="yt-simple-endpoint" style="display: flex;align-items: center;">
+                            <div style="flex: 1;display: flex;align-items: center">
+                                ${likeIcon}
+                                <span style="flex: 1;margin: 5px;">${videoInfo.like}</span>
+                            </div>
+                            <div style="flex: 1;display: flex;align-items: center">
+                                ${dislikeIcon}
+                                <span style="flex: 1;margin: 5px;">${videoInfo.dislike}</span>
+                            </div>
                         </div>
-                        <div style="flex: 1;display: flex;align-items: center">
-                            ${dislikeIcon}
-                            <span style="flex: 1;margin: 5px;">${videoInfo.dislike}</span>
-                        </div>
-                    </div>
-                </a>`);
+                    </a>`);
+            }
+        } catch (e) {
+            console.error(`insertHTML: ${e}`);
         }
     }
-    
+
     function getVideoInfo(a, res) {
         try {
             let data = JSON.parse((/var ytInitialData = (.*?)};/m).exec(res)[1] + '}');
@@ -247,28 +268,41 @@
                 authorVerify: (Boolean)(videoSecondaryInfoRenderer.owner.videoOwnerRenderer.badges)
             };
         } catch (e) {
+            console.error(`getVideoInfo: ${e}`);
             return null;
         }
     }
-    
+
     function getResponseList(aList) {
-        return aList.map(async function (a) {
-            return (await fetch(a.href, {
+        try {
+            return aList.map(async function (a) {
+                return (await fetch(a.href, {
                     headers: new Headers({
                         'content-type': 'text/html; charset=utf-8'
                     })
                 })).text();
-        });
+            });
+        } catch (e) {
+            console.error(`getResponseList: ${e}`);
+        }
     }
-    
+
     function getVideoIdByURL(url) {
-        let regex = /(\?v=|\&v=|\/\d\/|\/embed\/|\/v\/|\.be\/)([a-zA-Z0-9\-\_]+)/;
-        let id = url.match(regex);
-        return id ? id[2] : null;
+        try {
+            let regex = /(\?v=|\&v=|\/\d\/|\/embed\/|\/v\/|\.be\/)([a-zA-Z0-9\-\_]+)/;
+            let id = url.match(regex);
+            return id ? id[2] : null;
+        } catch (e) {
+            console.error(`getVideoIdByURL: ${e}`);
+        }
     }
-    
+
     function wait(ms) {
-        return new Promise(r => setTimeout(r, ms));
+        try {
+            return new Promise(r => setTimeout(r, ms));
+        } catch (e) {
+            console.error(`wait: ${e}`);
+        }
     }
-    
+
 })();

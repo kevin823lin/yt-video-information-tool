@@ -28,7 +28,7 @@
     var ytNavigate = false;
 
     var verifyIcon = `
-        <svg style="width: 1.3rem;height: 1.3rem;margin-left: 5px;" viewBox="0 0 24 24">
+        <svg style="width: 1.3rem;height: 1.3rem;" viewBox="0 0 24 24">
             <path fill="currentColor" d="M12,2C6.5,2,2,6.5,2,12c0,5.5,4.5,10,10,10s10-4.5,10-10C22,6.5,17.5,2,12,2z M9.8,17.3l-4.2-4.1L7,11.8l2.8,2.7L17,7.4 l1.4,1.4L9.8,17.3z"/>
         </svg>
     `;
@@ -219,10 +219,8 @@
                         <div style="display: flex;align-items: center;margin: 5px;">
                             <div style="flex: 1;width: min-content;margin-right: 5px;">
                                 <span class="yt-simple-endpoint">${videoInfo.title}</span>
-                                <div style="display: flex;align-items: center;">
-                                    <span>${videoInfo.author}</span>
-                                    ${videoInfo.authorVerify ? verifyIcon : ''}
-                                </div>
+                                <span>${videoInfo.author}${videoInfo.authorVerify ? verifyIcon : ''}</span>
+                                <br/>
                                 <span>${videoInfo.viewCount}</span>
                                 <br/>
                                 <span>${videoInfo.date}</span>

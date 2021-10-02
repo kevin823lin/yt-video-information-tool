@@ -28,7 +28,7 @@
     var ytNavigate = false;
 
     var verifyIcon = `
-        <svg style="width: 1.3rem;height: 1.3rem;" viewBox="0 0 24 24">
+        <svg style="min-width: 1.3rem;min-height: 1.3rem;max-width: 1.3rem;max-height: 1.3rem;margin-left: 2px;" viewBox="0 0 24 24">
             <path fill="currentColor" d="M12,2C6.5,2,2,6.5,2,12c0,5.5,4.5,10,10,10s10-4.5,10-10C22,6.5,17.5,2,12,2z M9.8,17.3l-4.2-4.1L7,11.8l2.8,2.7L17,7.4 l1.4,1.4L9.8,17.3z"/>
         </svg>
     `;
@@ -66,6 +66,12 @@
 				--yt-endpoint-hover-color: var(--yt-spec-text-primary);
 				--yt-endpoint-visited-color: var(--yt-spec-text-primary);
 			}
+            .yt-video-info span {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
 		`;
         let styleSheet = document.createElement('style');
         styleSheet.type = 'text/css';
@@ -219,12 +225,14 @@
                         <div style="display: flex;align-items: center;margin: 5px;">
                             <div style="flex: 1;width: min-content;margin-right: 5px;">
                                 <span class="yt-simple-endpoint">${videoInfo.title}</span>
-                                <span>${videoInfo.author}${videoInfo.authorVerify ? verifyIcon : ''}</span>
-                                <br/>
+                                <div style="display: flex;align-items: center;">
+                                    <span style="-webkit-line-clamp: 1;">${videoInfo.author}</span>
+                                    ${videoInfo.authorVerify ? verifyIcon : ''}
+                                </div>
                                 <span>${videoInfo.viewCount}</span>
-                                <br/>
+
                                 <span>${videoInfo.date}</span>
-                                <br/>
+
                             </div>
                             <img src="${videoInfo.imgURL}" style="max-width: 170px;flex: 1;height: fit-content;border-radius: 10px;margin-left: 5px;">
                         </div>

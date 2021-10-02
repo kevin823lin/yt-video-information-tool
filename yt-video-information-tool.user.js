@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YT Video Information Tool
 // @namespace    https://github.com/kevin823lin
-// @version      0.4
+// @version      0.5
 // @description  Show the video information which is mentioned in the description or the comments on YouTube™ videos.
 // @author       kevin823lin
 // @match        https://www.youtube.com/*

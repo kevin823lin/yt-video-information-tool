@@ -266,7 +266,7 @@
                 href: a.getAttribute('href'),
                 imgURL: `https://img.youtube.com/vi/${id}/mqdefault.jpg`,
                 title: videoPrimaryInfoRenderer.title.runs.map(ele => ele.text).join(''),
-                viewCount: videoPrimaryInfoRenderer.viewCount.videoViewCountRenderer.viewCount.simpleText,
+                viewCount: videoPrimaryInfoRenderer.viewCount.videoViewCountRenderer.shortViewCount.simpleText,
                 date: videoPrimaryInfoRenderer.dateText.simpleText,
                 like: videoPrimaryInfoRenderer.videoActions.menuRenderer.topLevelButtons[0].toggleButtonRenderer.defaultText.simpleText,
                 dislike: videoPrimaryInfoRenderer.videoActions.menuRenderer.topLevelButtons[1].toggleButtonRenderer.defaultText.simpleText,

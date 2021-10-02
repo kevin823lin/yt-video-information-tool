@@ -27,9 +27,14 @@
     var removeLock = false;
     var ytNavigate = false;
 
-    var verifyIcon = `
+    var CHECK_CIRCLE_THICK = `
         <svg style="min-width: 1.3rem;min-height: 1.3rem;max-width: 1.3rem;max-height: 1.3rem;margin-left: 2px;" viewBox="0 0 24 24">
             <path fill="currentColor" d="M12,2C6.5,2,2,6.5,2,12c0,5.5,4.5,10,10,10s10-4.5,10-10C22,6.5,17.5,2,12,2z M9.8,17.3l-4.2-4.1L7,11.8l2.8,2.7L17,7.4 l1.4,1.4L9.8,17.3z"/>
+        </svg>
+    `;
+    var OFFICIAL_ARTIST_BADGE = `
+        <svg style="min-width: 1.3rem;min-height: 1.3rem;max-width: 1.3rem;max-height: 1.3rem;" viewBox="0 0 24 24">
+	    	<path fill="currentColor" d="M12,4v9.38C11.27,12.54,10.2,12,9,12c-2.21,0-4,1.79-4,4c0,2.21,1.79,4,4,4s4-1.79,4-4V8h6V4H12z"/>
         </svg>
     `;
     var likeIcon = `
@@ -227,12 +232,10 @@
                                 <span class="yt-simple-endpoint">${videoInfo.title}</span>
                                 <div style="display: flex;align-items: center;">
                                     <span style="-webkit-line-clamp: 1;">${videoInfo.author}</span>
-                                    ${videoInfo.authorVerify ? verifyIcon : ''}
+                                    ${videoInfo.authorVerify ? (videoInfo.authorVerify == 'OFFICIAL_ARTIST_BADGE' ? OFFICIAL_ARTIST_BADGE : CHECK_CIRCLE_THICK) : ''}
                                 </div>
                                 <span>${videoInfo.viewCount}</span>
-
                                 <span>${videoInfo.date}</span>
-
                             </div>
                             <img src="${videoInfo.imgURL}" style="max-width: 170px;flex: 1;height: fit-content;border-radius: 10px;margin-left: 5px;">
                         </div>
@@ -271,7 +274,7 @@
                 like: videoPrimaryInfoRenderer.videoActions.menuRenderer.topLevelButtons[0].toggleButtonRenderer.defaultText.simpleText,
                 dislike: videoPrimaryInfoRenderer.videoActions.menuRenderer.topLevelButtons[1].toggleButtonRenderer.defaultText.simpleText,
                 author: videoSecondaryInfoRenderer.owner.videoOwnerRenderer.title.runs.map(ele => ele.text).join(''),
-                authorVerify: (Boolean)(videoSecondaryInfoRenderer.owner.videoOwnerRenderer.badges)
+                authorVerify: videoSecondaryInfoRenderer.owner.videoOwnerRenderer.badges ? videoSecondaryInfoRenderer.owner.videoOwnerRenderer.badges[0].metadataBadgeRenderer.icon.iconType : null
             };
         } catch (e) {
             console.error(`getVideoInfo: ${e}`);

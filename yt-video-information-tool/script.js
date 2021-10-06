@@ -1,13 +1,19 @@
 // ==UserScript==
-// @name         YT Video Information Tool
-// @namespace    https://github.com/kevin823lin
-// @version      0.5
-// @description  Show the video information which is mentioned in the description or the comments on YouTube™ videos.
-// @author       kevin823lin
-// @match        https://www.youtube.com/*
-// @icon         https://www.google.com/s2/favicons?domain=youtube.com
-// @grant        none
-// @date         2021-09-17
+// @name                YT Video Information Tool
+// @name:zh             YT 影片資訊工具
+// @name:zh-TW          YT 影片資訊工具
+// @name:zh-CN          YT 视频信息工具
+// @namespace           https://github.com/kevin823lin
+// @version             0.6
+// @description         Show the video information which is mentioned in the description or the comments on YouTube™ videos.
+// @description:zh      在 YouTube™ 中顯示資訊欄及留言所提及的影片資訊
+// @description:zh-TW   在 YouTube™ 中顯示資訊欄及留言所提及的影片資訊
+// @description:zh-CN   在 YouTube™ 中显示资讯栏及评论所提及的视频信息
+// @author              kevin823lin
+// @match               https://www.youtube.com/*
+// @icon                https://www.google.com/s2/favicons?domain=youtube.com
+// @grant               none
+// @date                2021-10-07
 // ==/UserScript==
 
 //icon(svg) from https://youtube.com/
